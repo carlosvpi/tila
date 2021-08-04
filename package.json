@@ -1,0 +1,9 @@
+{
+  "name": "tila",
+  "version": "1.0.0",
+  "description": "JS MVC",
+  "main": "index.js",
+  "repository": "https://github.com/carlosvpi/tila.git",
+  "author": "CarlosVazPI <carlos.vazpi@gmail.com>",
+  "license": "MIT"
+}
