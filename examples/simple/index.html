@@ -1,13 +1,20 @@
 <script src='../../lib/tila.js'></script>
 <body>
 <script>
-r(document.body)(
-  r`h1`('Hello, world'),
-  r`p`('p'),
-  r`ul`(
-    r`li`('a'),
-    r`li`('b'),
-    r`li`('c')
+tila(document.body)(
+  tila`h1`('Example'),
+  tila`p`('p'),
+  tila`p`('p'),
+  tila`ul`(
+    tila`li`('a').onEnter(enter => {
+      console.log('before')
+      setTimeout(async () => {
+        await enter()
+        console.log('after')
+      }, 1000)
+    }),
+    tila`li`('b'),
+    tila`li`('c')
   )
 )
 
