@@ -20,17 +20,7 @@ const clearCompleted = statex => () => {
   })
 }
 
-const memo = (f => {
-  const map = new Map()
-  return value => {
-    if (!map.has(value)) {
-      map.set(value, f(value))
-    }
-    return map.get(value)
-  }
-})
-
-const Filter = memo(label => memo(filterx => {
+const Filter = memoize((label,filterx) => {
   return tila`li`(
     tila`a`(label)
       .tap(a => {
@@ -43,9 +33,9 @@ const Filter = memo(label => memo(filterx => {
         filterx.publish(label)
       })
   )
-}))
+})
 
-const Todo = memo(todox => {
+const Todo = memoize(todox => {
   return tila`li.todo-li.enterable`(
     tila`div.view`(
       tila`input.toggle[type=checkbox]`().on`change`(async event => {
@@ -131,9 +121,9 @@ tila(document.querySelector('section.todoapp'))(
       ' items left'
     ),
     tila`ul.filters`(
-      Filter('All')(statex.get('filter')),
-      Filter('Active')(statex.get('filter')),
-      Filter('Completed')(statex.get('filter'))
+      Filter('All', statex.get('filter')),
+      Filter('Active', statex.get('filter')),
+      Filter('Completed', statex.get('filter'))
     ),
     tila`button.clear-completed`('Clear completed').tap(button => {
       statex.get('todos').pullSubscribe(todos => {
